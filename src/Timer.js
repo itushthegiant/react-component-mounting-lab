@@ -3,10 +3,24 @@ import React, { Component } from "react";
 class Timer extends Component {
   state = {
     time: 0,
+    interval: null,
     color: "#" + Math.floor(Math.random() * 16777215).toString(16)
   };
 
   // add your code here
+  componentDidMount() {
+   const interval = setInterval(this.clockTick, 1000)
+   this.setState({
+     ...this.state,
+     interval: interval
+   })
+  }
+
+
+  componentWillUnmount() {
+    clearInterval(this.state.interval)
+  }
+
 
   render() {
     const { time, color } = this.state;
